@@ -1,0 +1,231 @@
+[
+  {
+    "title": "Wohnung",
+    "phone": "",
+    "address": ""
+  },
+  {
+    "title": "PK 11",
+    "phone": "040428651110",
+    "address": "Steindamm 82, 20099 Hamburg"
+  },
+  {
+    "title": "PK 14",
+    "phone": "040428651410",
+    "address": "Caffamacherreihe 4, 20355 Hamburg"
+  },
+  {
+    "title": "PK 15",
+    "phone": "040428651510",
+    "address": "Spielbudenpl. 31, 20359 Hamburg"
+  },
+  {
+    "title": "PK 16",
+    "phone": "040428651610",
+    "address": "Lerchenstraße 82, 22767 Hamburg"
+  },
+  {
+    "title": "PK 17",
+    "phone": "040428651710",
+    "address": "Sedanstraße 28, 20146 Hamburg"
+  },
+  {
+    "title": "PK 21",
+    "phone": "040428652110",
+    "address": "Mörkenstraße 30, 22767 Hamburg"
+  },
+  {
+    "title": "PK 23",
+    "phone": "040428652310",
+    "address": "Troplowitzstraße 3, 22529 Hamburg"
+  },
+  {
+    "title": "PK 24",
+    "phone": "040428652410",
+    "address": "Garstedter Weg 24, 22453 Hamburg"
+  },
+  {
+    "title": "PK 25",
+    "phone": "040428652510",
+    "address": "Notkestraße 95, 22607 Hamburg"
+  },
+  {
+    "title": "PK 26",
+    "phone": "040428652610",
+    "address": "Blomkamp 23, 22549 Hamburg"
+  },
+  {
+    "title": "PK 27",
+    "phone": "040428652710",
+    "address": "Koppelstraße 7, 22527 Hamburg"
+  },
+  {
+    "title": "PK 31",
+    "phone": "040428653110",
+    "address": "Oberaltenallee 42, 22081 Hamburg"
+  },
+  {
+    "title": "PK 33",
+    "phone": "040428653310",
+    "address": "Wiesendamm 133, 22303 Hamburg"
+  },
+  {
+    "title": "PK 34",
+    "phone": "040428653410",
+    "address": "Wördenmoorweg 78, 22415 Hamburg"
+  },
+  {
+    "title": "PK 35",
+    "phone": "040428653510",
+    "address": "Wentzelplatz 1, 22391 Hamburg"
+  },
+  {
+    "title": "PK 36",
+    "phone": "040428653610",
+    "address": "Ellernreihe 135, 22179 Hamburg"
+  },
+  {
+    "title": "PK 37",
+    "phone": "040428653710",
+    "address": "Am Alten Posthaus 6, 22041 Hamburg"
+  },
+  {
+    "title": "PK 38",
+    "phone": "040428653810",
+    "address": "Scharbeutzer Str. 15, 22147 Hamburg"
+  },
+  {
+    "title": "PK 41",
+    "phone": "040428654110",
+    "address": "Sievekingdamm 20, 20535 Hamburg"
+  },
+  {
+    "title": "PK 42",
+    "phone": "040428654210",
+    "address": "Möllner Landstraße 44, 22111 Hamburg"
+  },
+  {
+    "title": "PK 43",
+    "phone": "040428654310",
+    "address": "Ludwig-Rosenberg-Ring 57, 21031 Hamburg"
+  },
+  {
+    "title": "PK 44",
+    "phone": "040428654410",
+    "address": "Georg-Wilhelm-Straße 77, 21107 Hamburg"
+  },
+  {
+    "title": "PK 46",
+    "phone": "040428654610",
+    "address": "Lauterbachstraße 7, 21073 Hamburg"
+  },
+  {
+    "title": "PK 47",
+    "phone": "040428654710",
+    "address": "Neugrabener Markt 3, 21149 Hamburg"
+  },
+  {
+    "title": "WSPK 2",
+    "phone": "040428665210",
+    "address": "Steinwerder Damm 10, 20457 Hamburg"
+  },
+  {
+    "title": "WSPK 3",
+    "phone": "040428665310",
+    "address": "Am Überwinterungshafen 1, 21079 Hamburg"
+  },
+  {
+    "title": "BP Hauptbahnhof",
+    "phone": "0403096810",
+    "address": "Hachmannplatz 10, 20099 Hamburg"
+  },
+  {
+    "title": "BP Altona",
+    "phone": "04039805480",
+    "address": "Harkorstraße 79, 22765 Hamburg"
+  },
+  {
+    "title": "BP Flughafen",
+    "phone": "040500270",
+    "address": "Flughafenstr. 1-3, 22335 Hamburg"
+  },
+  {
+    "title": "UKE",
+    "phone": "04074100",
+    "address": "Martinistraße 52, 20246 Hamburg"
+  },
+  {
+    "title": "AK Altona",
+    "phone": "0401818811501",
+    "address": "Paul-Ehrlich-Straße 1/Haus 1, 22763 Hamburg"
+  },
+  {
+    "title": "AK Wandsbek",
+    "phone": "0401818836633",
+    "address": "Alphonsstraße 14, 22043 Hamburg"
+  },
+  {
+    "title": "AK Nord",
+    "phone": "0401818873449",
+    "address": "Tangstedter Landstraße 400, 22417 Hamburg"
+  },
+  {
+    "title": "AK Barmbek",
+    "phone": "0401818820",
+    "address": "Rübenkamp 220 Erdgeschoss, 22307 Hamburg"
+  },
+  {
+    "title": "AK Harburg",
+    "phone": "0401818866666",
+    "address": "Eißendorfer Pferdeweg 52, 21075 Hamburg"
+  },
+  {
+    "title": "Marienkrankenhaus",
+    "phone": "04025461051",
+    "address": "Angerstraße 16, 22087 Hamburg"
+  },
+  {
+    "title": "Kinder UKE",
+    "phone": "04074100",
+    "address": "Martinistraße 52, 20246 Hamburg",
+    "latitude": 53.5906109,
+    "longitude": 9.9798161
+  },
+  {
+    "title": "AKK",
+    "phone": "040889080",
+    "address": "Bleickenallee 38, 22763 Hamburg",
+    "latitude": 53.551228,
+    "longitude": 9.913515
+  },
+  {
+    "title": "Israelitisches KH",
+    "phone": "040511250",
+    "address": "Orchideenstieg 14, 22297 Hamburg"
+  },
+  {
+    "title": "Agaplesion KH",
+    "phone": "040790200",
+    "address": "Hohe Weide 17, 20259 Hamburg"
+  },
+  {
+    "title": "BWK",
+    "phone": "040694725100",
+    "address": "Lesserstraße 180, 22049 Hamburg"
+  },
+  {
+    "title": "Albertinen KH",
+    "phone": "040558811",
+    "address": "Süntelstraße 11A, 22457 Hamburg"
+  },
+  {
+    "title": "Schön Klinik Eilbek",
+    "phone": "04020921717",
+    "address": "Dehnhaide 120, 22081 Hamburg"
+  },
+  {
+    "title": "IfR - Butenfeld",
+    "phone": "040741052127",
+    "address": "Butenfeld 34, 22529 Hamburg"
+  }
+]

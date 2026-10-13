@@ -1,0 +1,12 @@
+{
+  "name": "poldi-app-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@xmldom/xmldom": "0.9.12",
+    "pdf-lib": "1.17.1"
+  }
+}

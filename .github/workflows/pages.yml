@@ -1,0 +1,62 @@
+name: Testen und veröffentlichen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Logik-Tests
+        run: |
+          npm ci
+          npm test
+
+      - name: Webseite zusammenstellen
+        run: |
+          mkdir _site
+          cp -r index.html manifest.webmanifest sw.js poldi_locations.json css js vendor fonts icons _site/
+          # Jede Veröffentlichung bekommt eine eigene Cache-Version, damit Handys das Update laden.
+          sed -i "s/__BUILD__/${GITHUB_SHA::12}/" _site/sw.js
+          grep -q "${GITHUB_SHA::12}" _site/sw.js
+          # Alle im Service Worker gelisteten Dateien müssen existieren, sonst klappt Offline nicht.
+          node -e "
+            const s = require('fs').readFileSync('_site/sw.js', 'utf8');
+            const files = JSON.parse(s.match(/const FILES = (\[[\s\S]*?\]);/)[1].replace(/'/g, '\"').replace(/,\s*\]/, ']'));
+            const missing = files.filter((f) => f !== './' && !require('fs').existsSync('_site/' + f));
+            if (missing.length) { console.error('Fehlt:', missing); process.exit(1); }
+            console.log(files.length, 'Dateien für Offline-Betrieb vorhanden');
+          "
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,6 @@
+node_modules/
+_site/
+*.log
+# Das leere Formular gehört nicht ins öffentliche Repo
+fahrtenbuch_blanko*.pdf
+Fahrtenbuch_*.pdf
