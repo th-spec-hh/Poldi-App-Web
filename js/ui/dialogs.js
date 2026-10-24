@@ -33,8 +33,8 @@ function close(item) {
 }
 
 /** Rahmen eines Dialogs: Titel (26 px bold) mit optionalem ✕, Inhalt, Textbuttons. */
-function DialogCard({ title, onClose, buttons = [], flush = false, children }) {
-  return html`<div class="dialog" role="dialog" aria-modal="true" aria-label=${title}>
+function DialogCard({ title, onClose, buttons = [], flush = false, wide = false, children }) {
+  return html`<div class=${'dialog' + (wide ? ' wide' : '')} role="dialog" aria-modal="true" aria-label=${title}>
     <div class="dialog-head">
       <h2>${title}</h2>
       ${onClose && html`<${CloseButton} onClick=${onClose} />`}
@@ -186,7 +186,7 @@ function ShiftDetailsDialog({ id, close }) {
   // Letzter Eintrag ist der Endpunkt, wenn er Arbeit/Wohnung ist (nur bei beendetem Dienst).
   const endIndex = !shift.isActive && AbrechnungRows.endPoint(shift) !== null ? shift.visited.length - 1 : -1;
   const line = { fontSize: '17px', padding: '6px 0' };
-  return html`<${DialogCard} title=${`Dienst ${shift.label}`} onClose=${close}>
+  return html`<${DialogCard} title=${`Dienst ${shift.label}`} onClose=${close} wide>
     <div style=${{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       <div style=${{ fontSize: '20px', fontWeight: 700 }}>${shift.date}</div>
       <div style=${{ fontSize: '17px' }}>Kilometer Anfang: ${shift.kmStart ? Fmt.km(shift.kmStart) : '-'}</div>
@@ -200,7 +200,10 @@ function ShiftDetailsDialog({ id, close }) {
       const suffix = v.assignedBy ? ` (Auftrag: ${v.assignedBy})` : '';
       return i === endIndex
         ? html`<div class="secondary" style=${line}>Ende: ${v.title}${suffix}</div>`
-        : html`<div style=${line}>${v.title}${suffix}</div>`;
+        : html`<div class="visit-row" style=${line}>
+            <span class="grow">${v.title}${suffix}</span>
+            ${Fmt.visitTimes(v) && html`<span class="visit-times" aria-label=${`Eingetragen und erledigt: ${Fmt.visitTimes(v)}`}>${Fmt.visitTimes(v)}</span>`}
+          </div>`;
     })}
     </div>
   <//>`;

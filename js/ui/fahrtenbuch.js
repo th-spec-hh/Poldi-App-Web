@@ -75,12 +75,18 @@ function ShiftRow({ shift }) {
   else state = html`<div class="secondary" style=${{ fontSize: '15px', marginTop: '4px' }}>${Fmt.km(shift.kmStart)} → ${Fmt.km(shift.kmEnd)} km</div>`;
 
   return html`<div class="shift-row row" role="button" tabindex="0" ...${press}
-      aria-description="Lange drücken: bearbeiten oder löschen"
+      aria-description="Lange drücken: löschen"
       onKeyDown=${(e) => { if (e.key === 'Enter') press.onClick(e); }}>
     <div class="shift-badge">${shift.label}</div>
     <div class="grow"><div class="date">${shift.date}</div>${state}</div>
     ${missingKm
-    ? html`<span style=${{ color: 'var(--ink-muted)' }}><${Icon} name="chevronRight" size=${24} stroke=${2.8} /></span>`
+    // Eigene 48-px-Tippfläche: direkt zu den Dienst-Details, die übrige Zeile öffnet das Nachtragen.
+    ? html`<button class="shift-details-btn" aria-label=${`Details zu Dienst ${shift.label} vom ${shift.date}`}
+        onPointerDown=${(e) => e.stopPropagation()} onPointerUp=${(e) => e.stopPropagation()}
+        onKeyDown=${(e) => e.stopPropagation()}
+        onClick=${(e) => { e.stopPropagation(); present({ type: 'shiftDetails', shiftID: shift.id }); }}>
+        <${Icon} name="chevronRight" size=${24} stroke=${2.8} />
+      </button>`
     : !running && driven !== null && html`<div class="km"><strong>${Fmt.km(driven)}</strong><span class="secondary">km</span></div>`}
   </div>`;
 }

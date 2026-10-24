@@ -126,3 +126,12 @@ test('PDF-Probelauf', { skip: !blank || !existsSync(blank) ? 'POLDI_BLANK_PDF ni
   assert.ok(out.length > 100000);
   if (process.env.POLDI_OUT_PDF) writeFileSync(process.env.POLDI_OUT_PDF, out);
 });
+
+test('Fahrtenbuch-Details: Eintrags- und Erledigt-Zeit', () => {
+  assert.equal(Fmt.visitTimes({ timestamp: '10:47, 20.10.2026', addedAt: '09:12, 20.10.2026' }), '20.10. 09.12 / 10.47');
+  assert.equal(Fmt.visitTimes({ timestamp: '00:15, 21.10.2026', addedAt: '23:40, 20.10.2026' }), '20.10. 23.40 / 21.10. 00.15');
+  assert.equal(Fmt.visitTimes({ timestamp: '10:47, 20.10.2026' }), '20.10. 10.47');
+  assert.equal(Fmt.visitTimes({ timestamp: '' }), null);
+  const s = normalizeShift({ visited: [{ title: 'PK 11', timestamp: '10:47, 20.10.2026', addedAt: '09:12, 20.10.2026' }] });
+  assert.equal(s.visited[0].addedAt, '09:12, 20.10.2026');
+});

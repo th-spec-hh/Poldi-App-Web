@@ -21,6 +21,25 @@ export const Fmt = {
     return (timestamp || '').split(',')[0].trim();
   },
 
+  /**
+   * Zeiten für die Fahrtenbuch-Details: "20.10. 09.12 / 10.47" (eingetragen / erledigt),
+   * an verschiedenen Tagen "20.10. 23.40 / 21.10. 00.15", bei Altdaten nur "20.10. 10.47".
+   */
+  visitTimes(visit) {
+    const split = (ts) => {
+      const parts = (ts || '').split(',').map((p) => p.trim());
+      if (parts.length !== 2 || !parts[0] || parts[1].length < 6) return null;
+      return { time: parts[0].replace(':', '.'), date: parts[1].slice(0, 6) };
+    };
+    const done = split(visit.timestamp);
+    if (!done) return null;
+    const added = split(visit.addedAt);
+    if (!added) return `${done.date} ${done.time}`;
+    return added.date === done.date
+      ? `${added.date} ${added.time} / ${done.time}`
+      : `${added.date} ${added.time} / ${done.date} ${done.time}`;
+  },
+
   /** Tausendertrennung mit schmalem geschütztem Leerzeichen (U+202F), z. B. „123 456“. */
   km(value) {
     if (value === null || value === undefined) return '';
@@ -131,6 +150,8 @@ export function normalizeShift(s) {
         title: String(v.title ?? ''),
         timestamp: String(v.timestamp ?? ''),
         assignedBy: v.assignedBy ?? null,
+        // Zeitpunkt des Eintragens (fehlt bei Altdaten und Start-/Endpunkt).
+        addedAt: v.addedAt ?? null,
       }))
       : [],
     autoEndAt: typeof s.autoEndAt === 'number' ? s.autoEndAt : null,

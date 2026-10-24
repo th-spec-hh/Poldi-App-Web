@@ -6,7 +6,7 @@ import {
   clinics, isPoliceLocation, autoEndTime, shiftDate, parseKm,
 } from './logic.js';
 
-export const APP_VERSION = '2.2.0';
+export const APP_VERSION = '2.2.3';
 
 const ls = {
   get(key) {
@@ -368,7 +368,10 @@ export function markDone(id) {
   const timestamp = Fmt.timestamp();
   const shift = activeShift();
   if (shift) {
-    shift.visited.push({ title: S.tasks[pos].title, timestamp, assignedBy: S.tasks[pos].assignedBy });
+    shift.visited.push({
+      title: S.tasks[pos].title, timestamp, assignedBy: S.tasks[pos].assignedBy,
+      addedAt: S.tasks[pos].addedAt || null,
+    });
     saveShifts();
   }
   const tasks = [...S.tasks];
@@ -514,20 +517,9 @@ export function addEndpoint(id, text) {
   updateShift(id, (s) => s.visited.push({ title: text, timestamp: Fmt.timestamp(), assignedBy: null }));
 }
 
+// Langes Drücken im Fahrtenbuch: direkt „Dienst löschen?“ (Nachtragen per Tipp bzw. in der Abrechnung).
 export function shiftLongPressed(id) {
-  const shift = findShift(id);
-  if (!shift) return;
-  present({
-    type: 'menu',
-    title: `Dienst ${shift.label} vom ${shift.date}`,
-    options: ['Kilometerstand nachtragen', 'Startpunkt nachtragen', 'Endpunkt nachtragen', 'Löschen'],
-    onSelect: (which) => {
-      if (which === 0) present({ type: 'kmEdit', shiftID: id, onSaved: () => showSnackbar('Kilometerstand aktualisiert') });
-      else if (which === 1) present({ type: 'startPointEdit', shiftID: id, onSaved: () => showSnackbar('Startpunkt gespeichert') });
-      else if (which === 2) present({ type: 'endpointEdit', shiftID: id, onSaved: () => showSnackbar('Endpunkt hinzugefügt') });
-      else confirmDeleteShift(id);
-    },
-  });
+  confirmDeleteShift(id);
 }
 
 function confirmDeleteShift(id) {

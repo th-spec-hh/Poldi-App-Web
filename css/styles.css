@@ -150,6 +150,16 @@ svg.icon { display: block; flex: none; }
   background: var(--surface); border-radius: 28px; box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
   animation: pop 0.18s ease-out;
 }
+/* Dienst-Details: etwas breiter, damit Ort und Zeiten nebeneinander passen. */
+.dialog.wide { width: calc(100% + 16px); max-width: 576px; margin: 0 -8px; }
+.visit-row { display: flex; align-items: center; gap: 12px; }
+.visit-row .grow { flex: 1; min-width: 0; }
+.visit-times { flex: none; white-space: nowrap; font-size: 12px; color: var(--handle); }
+.shift-details-btn {
+  width: 48px; height: 48px; margin-right: -12px; flex: none; display: flex; align-items: center; justify-content: center;
+  border: 0; background: none; color: var(--ink-muted); border-radius: 24px; cursor: pointer;
+}
+.shift-details-btn:active { background: var(--divider); }
 .dialog-head { display: flex; align-items: center; gap: 8px; padding: 20px 16px 8px 24px; }
 .dialog-head h2 { flex: 1; margin: 0; font-size: 26px; font-weight: 700; color: var(--primary); }
 .dialog-body { padding: 12px 24px 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
