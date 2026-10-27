@@ -7,7 +7,7 @@ import { CloseButton, TextField, FilterChip } from './common.js';
 import { Icon } from './icons.js';
 
 /** Wie setCancelable() auf Android: Tipp neben den Dialog schließt ihn. */
-const cancelable = new Set(['confirm', 'shiftDetails', 'kmEdit', 'startPointEdit', 'endpointEdit', 'menu',
+const cancelable = new Set(['confirm', 'shiftDetails', 'kmEdit', 'startKmEdit', 'startPointEdit', 'endpointEdit', 'menu',
   'completeShift', 'personalData', 'message']);
 
 /** Zeigt den obersten Dialog über allen Screens (Android: MaterialAlertDialog). */
@@ -87,6 +87,8 @@ function DialogContent({ item, close }) {
       return html`<${ShiftDetailsDialog} id=${item.shiftID} close=${close} />`;
     case 'kmEdit':
       return html`<${KmEditDialog} id=${item.shiftID} close=${close} onSaved=${item.onSaved} />`;
+    case 'startKmEdit':
+      return html`<${KmEditDialog} id=${item.shiftID} startOnly close=${close} onSaved=${item.onSaved} />`;
     case 'startPointEdit': {
       const current = findShift(item.shiftID)?.startPoint;
       return html`<${DialogCard} title=${current ? `Startpunkt (bisher: ${current})` : 'Startpunkt nachtragen'} onClose=${close} flush>
@@ -133,19 +135,22 @@ function KmDialog({ item, close }) {
   <//>`;
 }
 
-function KmEditDialog({ id, close, onSaved }) {
+// startOnly: laufender Dienst, nur Start-km (End-km würde den Dienst beenden).
+function KmEditDialog({ id, close, onSaved, startOnly = false }) {
   const shift = findShift(id);
   const [start, setStart] = useState(shift?.kmStart || '');
   const [end, setEnd] = useState(shift?.kmEnd || '');
   const save = () => {
-    setKm(id, start.trim(), end.trim());
+    if (startOnly) updateShift(id, (s) => { s.kmStart = start.trim() || null; });
+    else setKm(id, start.trim(), end.trim());
     close();
     onSaved();
   };
-  return html`<${DialogCard} title="Kilometerstand nachtragen" onClose=${close} buttons=${[['Abbrechen', close], ['Speichern', save]]}>
+  return html`<${DialogCard} title=${startOnly ? 'Start-km nachtragen' : 'Kilometerstand nachtragen'} onClose=${close} buttons=${[['Abbrechen', close], ['Speichern', save]]}>
     <div class="stack">
-      <${TextField} label="Kilometerstand Anfang" value=${start} placeholder="z. B. 123456" onInput=${setStart} />
-      <${TextField} label="Kilometerstand Ende" value=${end} placeholder="z. B. 123999" onInput=${setEnd} onEnter=${save} />
+      <${TextField} label="Kilometerstand Anfang" value=${start} placeholder="z. B. 123456" onInput=${setStart}
+        onEnter=${startOnly ? save : undefined} />
+      ${!startOnly && html`<${TextField} label="Kilometerstand Ende" value=${end} placeholder="z. B. 123999" onInput=${setEnd} onEnter=${save} />`}
     </div>
   <//>`;
 }

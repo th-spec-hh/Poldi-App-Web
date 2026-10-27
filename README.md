@@ -1,7 +1,7 @@
 # Poldi (Web-App)
 
 Die Poldi-App als Web-App (PWA) für iPhone und Android: Dienste, Einsatzorte und Fahrtenbuch
-mit Abrechnungs-PDF. Stand: Android-App v2.2.3.
+mit Abrechnungs-PDF. Stand: Android-App v2.2.4.
 
 **Adresse:** https://th-spec-hh.github.io/Poldi-App-Web/
 

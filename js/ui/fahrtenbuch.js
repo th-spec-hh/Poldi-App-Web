@@ -56,7 +56,10 @@ function MonthHeader({ monthKey, shifts, expanded, onClick }) {
 function ShiftRow({ shift }) {
   const running = shift.isActive && shift.kmEnd === null;
   let missingKm = null;
-  if (!running) {
+  // Laufender Dienst: nur Start-km kann fehlen (Startpunkt ist Pflicht beim Start).
+  if (running) {
+    if (!(shift.kmStart || '').trim()) missingKm = 'Fehlt: Start-km';
+  } else {
     const noStart = !(shift.kmStart || '').trim();
     const noEnd = !(shift.kmEnd || '').trim();
     if (noStart && noEnd) missingKm = 'Fehlt: Start-km, End-km';
@@ -65,12 +68,16 @@ function ShiftRow({ shift }) {
   }
   const driven = drivenKm(shift);
   const press = usePress(() => {
-    if (missingKm) present({ type: 'kmEdit', shiftID: shift.id, onSaved: () => showSnackbar('Kilometerstand aktualisiert') });
+    if (missingKm && running) present({ type: 'startKmEdit', shiftID: shift.id, onSaved: () => showSnackbar('Start-km gespeichert') });
+    else if (missingKm) present({ type: 'kmEdit', shiftID: shift.id, onSaved: () => showSnackbar('Kilometerstand aktualisiert') });
     else present({ type: 'shiftDetails', shiftID: shift.id });
   }, () => shiftLongPressed(shift.id));
 
   let state;
-  if (running) state = html`<div class="state" style=${{ color: 'var(--active)' }}>Dienst läuft</div>`;
+  if (running) {
+    state = html`<div class="state" style=${{ color: 'var(--active)' }}>Dienst läuft${missingKm
+      && html`<span style=${{ color: 'var(--warning)' }}> · ${missingKm}</span>`}</div>`;
+  }
   else if (missingKm) state = html`<div class="state" style=${{ color: 'var(--warning)' }}>${missingKm}</div>`;
   else state = html`<div class="secondary" style=${{ fontSize: '15px', marginTop: '4px' }}>${Fmt.km(shift.kmStart)} → ${Fmt.km(shift.kmEnd)} km</div>`;
 

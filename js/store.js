@@ -6,7 +6,7 @@ import {
   clinics, isPoliceLocation, autoEndTime, shiftDate, parseKm,
 } from './logic.js';
 
-export const APP_VERSION = '2.2.3';
+export const APP_VERSION = '2.2.4';
 
 const ls = {
   get(key) {

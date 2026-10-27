@@ -379,6 +379,7 @@ const abbreviations = {
   'BP Hauptbahnhof': 'BP Hbf',
   'BP Altona': 'BP Alt.',
   'BP Flughafen': 'BP Flgh.',
+  'BP Harburg': 'BP Har',
   'Kinder UKE': 'KiUKE',
   'Agaplesion KH': 'Agap. KH',
   'Albertinen KH': 'Alb. KH',

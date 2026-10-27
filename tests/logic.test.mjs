@@ -77,6 +77,7 @@ test('Kürzel', () => {
   assert.equal(AbrechnungRows.abbreviate('PK 21'), '21');
   assert.equal(AbrechnungRows.abbreviate('WSPK 2'), 'WSPK 2');
   assert.equal(AbrechnungRows.abbreviate('AK Wandsbek'), 'AK W.');
+  assert.equal(AbrechnungRows.abbreviate('BP Harburg'), 'BP Har');
   assert.equal(AbrechnungRows.abbreviate('Kinder UKE'), 'KiUKE');
   assert.equal(AbrechnungRows.abbreviate('Schön Klinik Eilbek'), 'Eilb. KH');
   assert.equal(AbrechnungRows.abbreviate('Freitext'), 'Freitext');
